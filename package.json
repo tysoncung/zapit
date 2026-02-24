@@ -1,5 +1,5 @@
 {
-  "name": "zapit",
+  "name": "@tysoncung/zapit",
   "version": "0.2.0",
   "description": "Zap a Zod schema into a fully typed NestJS CRUD API with DynamoDB and CDK",
   "author": "Tyson Cung <tyson.cung@gmail.com>",
