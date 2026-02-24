@@ -3,7 +3,6 @@ import chalk from 'chalk';
 import { parseSchema } from '../parser';
 import { renderTemplates } from '../generators/renderer';
 import { writeOutput } from '../generators/writer';
-import { requirePro } from '../pro';
 
 interface GenerateOptions {
   output: string;
@@ -14,10 +13,6 @@ interface GenerateOptions {
 }
 
 export async function generateCommand(schemaPath: string, options: GenerateOptions) {
-  if (options.prisma) {
-    requirePro('--prisma');
-  }
-
   console.log(chalk.cyan('⚡ zapit generate'));
   console.log(chalk.gray(`  Schema: ${schemaPath}`));
   console.log(chalk.gray(`  Output: ${options.output}`));

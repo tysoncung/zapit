@@ -1,6 +1,6 @@
 {
   "name": "@tysoncung/zapit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Zap a Zod schema into a fully typed NestJS CRUD API with DynamoDB and CDK",
   "author": "Tyson Cung <tyson.cung@gmail.com>",
   "license": "MIT",
