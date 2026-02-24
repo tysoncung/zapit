@@ -1,0 +1,49 @@
+{
+  "name": "zapit",
+  "version": "0.1.0",
+  "description": "Zap a Zod schema into a fully typed NestJS CRUD API with DynamoDB and CDK",
+  "author": "Tyson Cung <tyson.cung@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "zapit": "./dist/cli.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "tsx src/cli.ts generate examples/user.schema.ts --dry-run"
+  },
+  "keywords": [
+    "zod",
+    "nestjs",
+    "crud",
+    "codegen",
+    "dynamodb",
+    "api",
+    "scaffold",
+    "serverless",
+    "cdk"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tysoncung/zapit"
+  },
+  "dependencies": {
+    "chalk": "^4",
+    "commander": "^12",
+    "fs-extra": "^11",
+    "handlebars": "^4",
+    "zod": "^3"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11",
+    "@types/node": "^22",
+    "tsx": "^4",
+    "typescript": "^5"
+  }
+}
