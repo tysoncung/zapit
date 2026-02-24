@@ -3,18 +3,27 @@ import chalk from 'chalk';
 import { parseSchema } from '../parser';
 import { renderTemplates } from '../generators/renderer';
 import { writeOutput } from '../generators/writer';
+import { requirePro } from '../pro';
 
 interface GenerateOptions {
   output: string;
   dryRun?: boolean;
   dynamodb?: boolean;
   cdk?: boolean;
+  prisma?: boolean;
 }
 
 export async function generateCommand(schemaPath: string, options: GenerateOptions) {
+  if (options.prisma) {
+    requirePro('--prisma');
+  }
+
   console.log(chalk.cyan('⚡ zapit generate'));
   console.log(chalk.gray(`  Schema: ${schemaPath}`));
   console.log(chalk.gray(`  Output: ${options.output}`));
+  if (options.prisma) {
+    console.log(chalk.gray('  Mode: Prisma'));
+  }
   console.log();
 
   // 1. Parse the Zod schema
@@ -27,8 +36,9 @@ export async function generateCommand(schemaPath: string, options: GenerateOptio
 
   // 2. Render templates
   const files = renderTemplates(schema, {
-    dynamodb: options.dynamodb !== false,
+    dynamodb: options.dynamodb !== false && !options.prisma,
     cdk: options.cdk !== false,
+    prisma: !!options.prisma,
   });
 
   // 3. Write or preview

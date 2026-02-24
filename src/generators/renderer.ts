@@ -5,6 +5,9 @@ import { serviceTemplate } from '../templates/service';
 import { dtoTemplate } from '../templates/dto';
 import { moduleTemplate } from '../templates/module';
 import { repositoryTemplate } from '../templates/repository';
+import { validationPipeTemplate } from '../templates/validation-pipe';
+import { prismaRepositoryTemplate } from '../templates/prisma-repository';
+import { generatePrismaModel } from '../templates/prisma-model';
 
 export interface GeneratedFile {
   path: string;
@@ -14,6 +17,7 @@ export interface GeneratedFile {
 interface RenderOptions {
   dynamodb: boolean;
   cdk: boolean;
+  prisma?: boolean;
 }
 
 // Register Handlebars helpers
@@ -60,7 +64,22 @@ export function renderTemplates(schema: ParsedSchema, options: RenderOptions): G
     content: Handlebars.compile(moduleTemplate)(ctx),
   });
 
-  if (options.dynamodb) {
+  // Validation pipe
+  files.push({
+    path: `${dir}/validation.pipe.ts`,
+    content: validationPipeTemplate,
+  });
+
+  if (options.prisma) {
+    files.push({
+      path: `${dir}/${schema.kebabName}.repository.ts`,
+      content: Handlebars.compile(prismaRepositoryTemplate)(ctx),
+    });
+    files.push({
+      path: `prisma/${schema.kebabName}.prisma`,
+      content: generatePrismaModel(schema),
+    });
+  } else if (options.dynamodb) {
     files.push({
       path: `${dir}/${schema.kebabName}.repository.ts`,
       content: Handlebars.compile(repositoryTemplate)(ctx),

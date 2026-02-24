@@ -1,0 +1,19 @@
+export const initTsconfig = JSON.stringify({
+  compilerOptions: {
+    module: 'commonjs',
+    declaration: true,
+    removeComments: true,
+    emitDecoratorMetadata: true,
+    experimentalDecorators: true,
+    allowSyntheticDefaultImports: true,
+    target: 'ES2022',
+    sourceMap: true,
+    outDir: './dist',
+    rootDir: './src',
+    strict: true,
+    esModuleInterop: true,
+    skipLibCheck: true,
+  },
+  include: ['src/**/*'],
+  exclude: ['node_modules', 'dist'],
+}, null, 2) + '\n';

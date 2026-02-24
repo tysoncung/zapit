@@ -10,7 +10,7 @@ const program = new Command();
 program
   .name('zapit')
   .description('⚡ Zap a Zod schema into a fully typed NestJS CRUD API')
-  .version('0.1.0');
+  .version('0.2.0');
 
 program
   .command('generate <schema>')
@@ -20,6 +20,7 @@ program
   .option('-d, --dry-run', 'Preview generated files without writing')
   .option('--no-dynamodb', 'Skip DynamoDB repository generation')
   .option('--no-cdk', 'Skip CDK stack generation')
+  .option('--prisma', 'Generate Prisma repository instead of DynamoDB (Pro)')
   .action(generateCommand);
 
 program
